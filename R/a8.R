@@ -2,17 +2,15 @@ rm(list = ls())
 library(data.table)
 library(magrittr)
 library(stringr)
-dtt <- fread('a8.csv') 
+dtt <- fread('../Input/a8.csv') 
 
 dtt <- dtt %>%
-  # .[, operation := gsub('(^[a-z]{3}) .*$', '\\1', input)] %>%
-  # .[, argument  := as.integer(gsub('^[a-z]{3} (.*$?)', '\\1', input))] %>%
   .[, line := 1:nrow(dtt)]
 
 loop <- T
 lns <- 1
 accumulator  <- 0
-lines_list <- c()
+lines_list   <- c()
 while (loop) {
   if (lns %in% lines_list) break
   lines_list <- c(lines_list, lns)
@@ -26,7 +24,7 @@ while (loop) {
     lns = lns + dtt[lns, argument]
   }
 }
-accumulator
+print(accumulator)
 ################################################################################
 ## -----------------------------------------------------------------------------
 ## --- SECOND PART ---
@@ -65,6 +63,6 @@ func_check <- function(from, to, dtt, which_ch = 1) {
   }
 
 }
-func_check (from = 'nop', to = 'jmp', dtt = dtt, which_ch = 1)
-func_check (from = 'jmp', to = 'nop', dtt = dtt, which_ch = 1)
+print(func_check(from = 'nop', to = 'jmp', dtt = dtt, which_ch = 1))
+print(func_check(from = 'jmp', to = 'nop', dtt = dtt, which_ch = 1))
 

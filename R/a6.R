@@ -5,11 +5,11 @@ library(stringr)
 
 
 # --------------------------------------------------------------
-# '-' separator between different 
+# '-' separator between different group
 # '~' separator between respondent in one group
 # --------------------------------------------------------------
 
-dtt <- fread('a6.csv') %>%
+dtt <- fread('../Input/a6.csv') %>%
   .[name == '', name := '-']
 
 input_string <- paste(dtt[['name']], collapse = '')
@@ -20,7 +20,7 @@ count_answers <- lapply(input_string, function(x) {
   return(x)
 })
 answer <- sum(unlist(count_answers))
-
+print(answer)
 # --------------------------------------------------------------
 # SECOND PART
 # --------------------------------------------------------------
@@ -41,3 +41,4 @@ count_answers <- lapply(input_string, function(x) {
 })
    
 answer <- sum(unlist(count_answers))
+print(answer)

@@ -4,7 +4,7 @@ library(data.table)
 library(magrittr)
 library(stringr)
 
-ingredients  <- read.csv('a21.txt', sep = ';', header = FALSE, stringsAsFactors = FALSE)
+ingredients  <- read.csv('../Input/a21.txt', sep = ';', header = FALSE, stringsAsFactors = FALSE)
 ingredients <- paste0(ingredients$V1, ',', ingredients$V2, ',', ingredients$V3)
 
 allergens <- gsub('.*?\\((.*?)\\).*?$', '\\1', ingredients)
@@ -28,6 +28,7 @@ ingredients_info <- ingredients_info  %>%
   merge(count_ingredtients, all.x = TRUE, by = c('ingredients', 'ingredients_split'),
         allow.cartesian = TRUE)
 rm(count_ingredtients, allergens, ingredients)
+
 # --------------------------------------------------------------
 # PART 1
 # --------------------------------------------------------------

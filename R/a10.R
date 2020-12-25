@@ -2,16 +2,18 @@ rm(list = ls())
 library(data.table)
 library(magrittr)
 library(stringr)
-dtt <- fread('a10.csv')
+dtt <- fread('../Input/a10.csv')
 
 inp <- c(0, sort(dtt[['input']]))
 inp <- c(inp, last(inp) + 3)
 
-# all.dif <- inp[2:length(inp)] - inp[1:length(inp)-1]
+##------------------------------------------------------------------
+## PART 1
+##------------------------------------------------------------------
 all.dif <- diff(inp)
 answ_1 <- sum(all.dif == 1)
 answ_3 <- sum(all.dif == 3)
-answ_1 * answ_3
+print(answ_1 * answ_3)
 
 
 # --------------------------------------------------------------
@@ -36,5 +38,4 @@ for (i in one_repeats) {
   }
 }
 options(scipen = 999)
-
-as.integer(n)
+print(n)

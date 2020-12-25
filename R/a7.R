@@ -2,7 +2,8 @@ rm(list = ls())
 library(data.table)
 library(magrittr)
 library(stringr)
-dtt <- read.csv('a7.csv', stringsAsFactors = FALSE) %>%
+
+dtt <- read.csv('../Input/a7.csv', stringsAsFactors = FALSE) %>%
   data.table()
 
 dtt<- dtt %>%
@@ -23,7 +24,7 @@ while (loop) {
   }
 }
 
-sum(rowSums(checks) != 0)
+print(sum(rowSums(checks) != 0))
 
 ################################################################################
 ## -----------------------------------------------------------------------------
@@ -61,6 +62,6 @@ while (loop) {
   if (length(bags_inside) == 0) loop <- F
   
 }
-answer
+print(answer)
 
 

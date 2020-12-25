@@ -37,11 +37,11 @@ for(i in 1:nrow(dtt)) {
   if (start_position_row == nrow(dtt)) break
 }
 
-count_tree 
-count_tree_1
-count_tree_2
-count_tree_3
-count_tree_4
-count_tree_5
-
-count_tree * count_tree_1 * count_tree_2 * count_tree_4 * count_tree_5
+# count_tree 
+# count_tree_1
+# count_tree_2
+# count_tree_3
+# count_tree_4
+# count_tree_5
+# 
+# count_tree * count_tree_1 * count_tree_2 * count_tree_4 * count_tree_5

@@ -9,7 +9,7 @@ import::from('pracma', 'rot90')
 import::from('dplyr', 'last')
 
 
-tiles <- read.csv('a20.txt', header = FALSE, stringsAsFactors = FALSE)
+tiles <- read.csv('../Input/a20.txt', header = FALSE, stringsAsFactors = FALSE)
 tiles <- tiles$V1
 
 id <- which(grepl('Tile', tiles))
@@ -80,7 +80,7 @@ print(format(ans, scientific = FALSE))
 # --------------------------------------------------------------
 # PART 2
 # IMAGE ASSEMBLING in THRRE PARTS, I think it should be possible 
-# to asseble in one step/round (maybe two)
+# to assemble in one step/round (maybe two)
 # --------------------------------------------------------------
 ##### Assembling frame/Edges ######
 
@@ -88,7 +88,7 @@ stop_loop <- FALSE
 select_tile <- corner_tiles[1] #initializing from random corner
 checked <- c()
 assembled_edges <- list()
-for (j in 1:4) {#LOOPING throuth all corners and creating each edge (from corner to corner)
+for (j in 1:4) {#LOOPING through all corners and creating each edge (from corner to corner)
   out <- assemble_initial_two_tiles(selected_tile = select_tile,
                                     click_tiles_info = click_tile_info,
                                     checked_tiles = checked,
@@ -165,6 +165,7 @@ for (st in c(top, 'last_edge')){
   }
 }
 
+#TODO RE-WRITE IMAGE ASSEMBLING USING ONLY TWO STEPS
 ##------------------------------------------------------------------------------
 #Dropping edges of each tile
 drop <- c(seq(0, nr[1], by = 10), seq(1, nr[1], by = 10))
@@ -177,7 +178,7 @@ rm(inner, edges, drop, checked, edge_last,
 # --------------------------------------------------------------
 # FINDING monsterS/MONSTERS
 # --------------------------------------------------------------
-monster <- read.csv('a20_monster.txt', header = FALSE, stringsAsFactors = FALSE)
+monster <- read.csv('../Input/a20_monster.txt', header = FALSE, stringsAsFactors = FALSE)
 
 nrow_monster        <- nrow(monster)
 monster             <- unlist(strsplit(monster$V1, ''))

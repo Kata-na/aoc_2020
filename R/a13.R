@@ -3,26 +3,26 @@ library(data.table)
 library(magrittr)
 library(stringr)
 library(pracma)
-dtt <- read.csv('../Input/a13.csv', stringsAsFactors = FALSE) %>%
+import::from('numbers', 'modinv', 'chinese')
+dtt <- read.table('../Input/a13.txt', header = FALSE, stringsAsFactors = FALSE) %>%
   data.table()
 
 # --------------------------------------------------------------
 # PART 1
 # --------------------------------------------------------------
-time_stamp <- as.integer(dtt[1, input])
-bus_no <- unlist(strsplit(dtt[2, input], ','))
+time_stamp <- as.integer(dtt[1, V1])
+bus_no <- unlist(strsplit(dtt[2, V1], ','))
 bus_no <- as.integer(bus_no[bus_no != 'x'])
 
 depart_after_ts <- bus_no * floor(time_stamp/bus_no) + bus_no
 wait_time <- depart_after_ts - time_stamp
 answer <- bus_no[which(wait_time == min(wait_time))] * 
   wait_time[which(wait_time == min(wait_time))]
-
+print(answer)
 # --------------------------------------------------------------
 # PART 2
 # --------------------------------------------------------------
-test_inp <- '7,13,x,x,59,x,31,19'
-bus_no <- unlist(strsplit(test_inp, ','))
+bus_no <- unlist(strsplit(dtt[2, V1], ','))
 
 dtsr <- 0:(length(bus_no)-1) #departure time stamp rule relative to first bus
 dtsr <- dtsr[bus_no !='x']
@@ -42,7 +42,7 @@ while (TRUE) {
 lcm <- Lcm(bus_no[1], bus_no[2])
 
 # --------------------------------------------------------------
-# Looping through remaining busses
+# Looping through remaining buses
 # --------------------------------------------------------------
 
 for (j in 3:length(bus_no)) {
@@ -61,7 +61,9 @@ for (j in 3:length(bus_no)) {
 }
 options(scipen = 999)
 ans  
-all(ans %% bus_no == remainder) #Check if answer aogned with rules, i.e. remainders are correct
+all(ans %% bus_no == remainder) #Check if answer aligned with rules, i.e. remainders are correct
+print(ans)
+
 
 #####################################################################
 # --------------------------------------------------------------
@@ -95,22 +97,23 @@ mod_inverse <- unlist(mod_inverse)
 print(glue::glue('modinv: {paste(mod_inverse, collapse =", ")}\n
                  Manually calc mod inverses: {paste(Xi, collapse =", ")}'))
 ##------------------------------------------------------------------------------
-log(Ni)/log(bus_no)
-options(scipen = 999)
+# log(Ni)/log(bus_no)
+# options(scipen = 999)
 answer <- sum(remainder * Ni * Xi)%%prod(bus_no) 
 
 ##### for first 8 options/bus_no, correct answer is given. However for 9th 
 # it needs to be corrected by remainder, same happens even then calculating 
 # using package. Might be some rule for CRT I am not aware of :(
-answer_corrected <- answer - ((answer%%bus_no)[1] - remainder[1])
+median((answer%%bus_no) - remainder)
+answer_corrected <- answer  - median((answer%%bus_no) - remainder)
 all(answer_corrected%%bus_no == remainder)
 
 # --------------------------------------------------------------
 # Using chinese function from  package numbers to check if 
 # calculations where ok
 # --------------------------------------------------------------
-library(numbers)
 packet_answer <- chinese(a = remainder, m = bus_no)
 print(paste0('My answer: ', answer))
 print(paste0('Packet answer: ', packet_answer))
-packet_answer - ((packet_answer%%bus_no)[1] - remainder[1])  
+packet_answer - median((answer%%bus_no) - remainder)
+

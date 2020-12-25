@@ -5,7 +5,7 @@ library(magrittr)
 library(stringr)
 
 t1 <- Sys.time()
-dtt <- read.csv('a19.txt', header = FALSE, stringsAsFactors = FALSE)
+dtt <- read.csv('../Input/a19.txt', header = FALSE, stringsAsFactors = FALSE)
 
 msg   <- dtt[['V1']][which(grepl('^[a-z]*$', dtt[['V1']]))]
 rules <- data.table(inp = dtt[['V1']][which(!grepl('^[a-z]*$', dtt[['V1']]))]) %>%
@@ -21,11 +21,9 @@ multiple_string_replacment <- function(str, patterns, replacements) {
   }
   return(str)
 }
-
 # --------------------------------------------------------------
 # Preparing Rules
 # --------------------------------------------------------------
-
 stop_loop <- FALSE
 drop_id <- Inf
 while (!stop_loop) {
@@ -52,7 +50,7 @@ print(ans)
 
 # --------------------------------------------------------------
 # PART 2 
-# VERY dumm way of solving with regex and few loops
+# VERY dumb way of solving with regexp and few loops
 # --------------------------------------------------------------
 
 rules[ruleNo == 8, 'ruleOriginal'] <- paste0('(', '42 | 42 8', ')')

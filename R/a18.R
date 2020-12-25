@@ -7,13 +7,12 @@ library(stringr)
 import::from('magrittr', '%>%')
 t1 <- Sys.time()
 
-inp_raw <- read.csv('a18.txt', header = FALSE, stringsAsFactors = FALSE) %>%
+inp_raw <- read.csv('../Input/a18.txt', header = FALSE, stringsAsFactors = FALSE) %>%
   data.table() %>%
   .[, r := .I]
 
-
 # --------------------------------------------------------------
-# Deffining my functions: infix
+# Defining my functions: infix
 # --------------------------------------------------------------
 `%sum%` <- function(x, y) {
   return(x+y)
@@ -30,9 +29,8 @@ inp <- copy(inp_raw) %>%
 ans <- sum(inp[['out']])
 print(ans)
 
-
 # --------------------------------------------------------------
-# PART 2, additinion precedencs multiplication
+# PART 2, addition precedence multiplication
 # --------------------------------------------------------------
 
 inp <- copy(inp_raw)
@@ -44,15 +42,7 @@ inp <- inp %>%
 ans <- sum(inp[['out']])
 print(ans)
 print(Sys.time() - t1)
-# inp_tmp <- copy(inp)
-# --------------------------------------------------------------
-# Checking normal mathermatics
-# --------------------------------------------------------------
 
-# inp <- inp %>%
-#   .[, input2 := gsub('\\*', '%multip%', V1)]%>%
-#   .[, out2 := eval(parse(text = input2)), by = r] %>%
-#   .[, out3 := eval(parse(text = V1)), by = r]
 
 ################################################################################
 ## -----------------------------------------------------------------------------
@@ -60,6 +50,7 @@ print(Sys.time() - t1)
 ## LOOPING AND USING REGEX/REPLACEMENT; WORKS BUT INFIX BETTER
 ## -----------------------------------------------------------------------------
 ################################################################################
+cat('\nREGEX SOLUTION EXPERIMENT\n')
 t2 <- Sys.time()
 inp <- copy(inp_raw)
 
@@ -95,5 +86,4 @@ for (input in inp[['V1']]) {
 ans <- sum(out_list)
 print(ans)
 print(Sys.time() - t2)
-print(Sys.time() - t1)
 

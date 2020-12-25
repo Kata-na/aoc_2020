@@ -9,7 +9,6 @@ inp <- read.table('../Input/a24.txt', header = FALSE, stringsAsFactors = FALSE) 
   .[, input := V1]
 
 allowed_dir <- c('e', 'se', 'sw', 'w', 'nw', 'ne')
-
 input <- inp$input
 ##------------------------------------------------------------------
 ## PREP DATA
@@ -26,7 +25,6 @@ while (!stop_loop){
   if (all(inp$V1 == '')) stop_loop <- TRUE
   it <- it + 1
 }
-# inp[, V1 := NULL]
 dir_matrix <- as.matrix(inp[, paste0('dir', 1:(it-1)), with = FALSE])
 dir_matrix[dir_matrix==''] <- 'no_change'
 
@@ -41,7 +39,7 @@ colnames(coord_change) <- c('X', 'Y', 'Z')
 ##------------------------------------------------------------------
 final_coord <- matrix(0, nrow = nrow(dir_matrix), ncol = 3)
 #Stepping through all changes. Each column of dir_matrix describes one step
-for (i in 1:ncol(dir_matrix)) { #LOOPING THROUGH Columns of direction matrix
+for (i in 1:ncol(dir_matrix)) { #LOOPING THROUGH Columns of the direction matrix
   # cc  <- dir_matrix[, i]
   cc <- coord_change[dir_matrix[, i], ]
   final_coord <- final_coord  + cc

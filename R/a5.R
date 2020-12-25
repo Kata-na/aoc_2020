@@ -2,7 +2,7 @@ rm(list = ls())
 library(data.table)
 library(magrittr)
 library(stringr)
-dtt <- read.csv('a5.csv', stringsAsFactors = FALSE) %>%
+dtt <- read.csv('../Input/a5.csv', stringsAsFactors = FALSE) %>%
   data.table()
 
 min_max_func <- function(id, skip_symbols, min_v, max_v, upper_l) {
@@ -32,7 +32,7 @@ dtt <- dtt %>%
 dt_final <- dtt[, .(id, final_row, final_columnn)]
 
 dt_final[, seat_id := final_row * 8 + final_columnn]
-max(dt_final[, seat_id])
+print(max(dt_final[, seat_id]))
 
 ##------------------------------------------------------------------------------
 ##### SECOND PART ######
@@ -43,7 +43,8 @@ dt_final[, check_rule := ((seat_id - 2) %in% all_ids & !(seat_id - 1) %in% all_i
 my_seat_id <- dt_final[(check_rule), seat_id] - 1
 my_seat_id
 # Other way
-sort(dt_final[, seat_id])[diff(sort(dt_final[, seat_id]))!=1] +1
+print(sort(dt_final[, seat_id])[diff(sort(dt_final[, seat_id]))!=1] +1)
+
 
 # --------------------------------------------------------------
 # --------------------------------------------------------------
@@ -58,4 +59,4 @@ dt_final[, 'binary'] <- gsub('R|B', 1, gsub('F|L', 0, dtt[, id]))
 dt_final <- dt_final %>%
   .[, int_seat_id := strtoi(binary , base = 2)]
 
-sort(dt_final[, int_seat_id])[diff(sort(dt_final[, int_seat_id]))!=1] +1
+print(sort(dt_final[, int_seat_id])[diff(sort(dt_final[, int_seat_id]))!=1] +1)

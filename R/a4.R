@@ -30,7 +30,7 @@ dt_final[, 'count_non_empty'] <-
   rowSums(!is.na(dt_final[, c('byr', 'ecl', 'pid', 'eyr', 'iyr', 'hcl', 'hgt')]))
 
 answer <- nrow(dt_final[count_non_empty == 7, ])
-answer
+print(answer)
 ##------------------------------------------------------------------------------
 
 # --------------------------------------------------------------

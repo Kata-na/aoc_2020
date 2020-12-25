@@ -6,7 +6,7 @@ library(magrittr)
 library(stringr)
 cycles  <- 6
 
-inp <- fread('a17.txt', header = FALSE, col.names = 'input') %>%
+inp <- fread('../Input/a17.txt', header = FALSE, col.names = 'input') %>%
   .[, input := gsub('#', 1, gsub('\\.', 0, input))]
 
 inp_matrix <- 
@@ -15,13 +15,10 @@ inp_matrix<- stringr::str_split_fixed(inp$input, '', Inf)
 storage.mode(inp_matrix) <- 'integer'
 
 ################################################################################
-## -----------------------------------------------------------------------------
 ## --- PART 1 ---
-## -----------------------------------------------------------------------------
 ################################################################################
-# --------------------------------------------------------------
-# INITIALIZING ARRAY, WHICH Will represennt 3D CUBE
-# --------------------------------------------------------------
+
+# INITIALIZING ARRAY, WHICH Will represent 3D CUBE
 arra_dims <- c(nrow(inp_matrix) + 2 * cycles,
                ncol(inp_matrix) + 2 * cycles,
                1 + 2 * cycles)
@@ -57,14 +54,10 @@ ans <- sum(inp_cube)
 
 print(ans)
 ################################################################################
-## -----------------------------------------------------------------------------
-## --- PART 4 ---
-## -----------------------------------------------------------------------------
+## --- PART 2 ---
 ################################################################################
-# --------------------------------------------------------------
-# INITIALIZING ARRAY, WHICH Will represennt 4D hypercuboid
-# --------------------------------------------------------------
 
+# INITIALIZING ARRAY, WHICH Will represent 4D hypercuboid
 arra_dims <- c(nrow(inp_matrix) + 2 * cycles,
                ncol(inp_matrix) + 2 * cycles,
                1 + 2 * cycles,

@@ -3,7 +3,7 @@ t1 <- Sys.time()
 library(data.table)
 library(magrittr)
 
-decks  <- read.csv('a22.txt', sep = ';', header = FALSE, stringsAsFactors = FALSE)
+decks  <- read.csv('../Input/a22.txt', sep = ';', header = FALSE, stringsAsFactors = FALSE)
 id <- grep('Player', decks$V1)
 player_1 <- as.integer(decks[(id[1]+1):(id[2]-1), 'V1'])
 player_2 <- as.integer(decks[(id[2]+1):nrow(decks), 'V1'])

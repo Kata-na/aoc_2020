@@ -2,7 +2,7 @@ rm(list = ls())
 library(data.table)
 library(magrittr)
 library(stringr)
-dtt <- fread('a9.csv')
+dtt <- fread('../Input/a9.csv')
 
 find_bad <- function(dt, lns, preamble_len = 25 ) {
   input_num <- as.numeric(dt[(lns - preamble_len):(lns-1), input])
@@ -19,7 +19,7 @@ find_bad <- function(dt, lns, preamble_len = 25 ) {
 }
 
 answer <- find_bad(dt = dtt, lns = 26, preamble_len = 25)
-
+print(answer)
 ################################################################################
 ## -----------------------------------------------------------------------------
 ## --- SECOND PART ---
@@ -49,7 +49,7 @@ sum_by_window <- function(dt, target, lst, window_size = 5) {
   }
 }
 out <- sum_by_window(dt = dtt, target = answer, lst = lst, window_size = 20)
-print(out)
+# print(out)
 print(max(out) + min(out))
 
 ##------------------------------------------------------------------------------
