@@ -1,7 +1,7 @@
 library(data.table)
 library(magrittr)
 
-dtt <- fread('../Input/a1.csv')
+dtt <- fread('../Input/a1.txt')
 
 n <- length(dtt[['V1']])
 for (i in 1:n-1) {
