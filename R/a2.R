@@ -4,8 +4,10 @@ library(magrittr)
 library(stringr)
 import::from('tidyr', 'separate')
 
-dtt <- read.csv('../Input/a2.csv', stringsAsFactors = FALSE) %>%
-  data.table()
+dtt <- read.csv('../Input/a2.txt', header = FALSE, stringsAsFactors = FALSE) %>%
+  data.table() %>%
+  setnames('V1', 'input')
+  
 dtt <- data.table(str_split_fixed(dtt$input, ' ', n=3))
 
 dtt <- dtt %>%
@@ -21,7 +23,7 @@ dtt <- dtt %>%
 
 dtt <- dtt %>%
   .[, check := (count >= n.min & count <= n.max)]
-sum(dtt$check)
+print(sum(dtt$check))
 
 ##------------------------------------------------------------------------------
 
@@ -30,5 +32,5 @@ dtt <- dtt %>%
        substring(password, n.max, n.max) == l] %>%
   .[, check2 := substring(password, n.min, n.min) == l &
       substring(password, n.max, n.max) == l]
-sum(dtt[['check1']] & !dtt[['check2']])
+print(sum(dtt[['check1']] & !dtt[['check2']]))
 
