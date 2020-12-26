@@ -2,7 +2,8 @@ rm(list = ls())
 library(data.table)
 library(magrittr)
 library(stringr)
-dtt <- read.csv('../Input/a5.csv', stringsAsFactors = FALSE) %>%
+dtt <- read.csv('../Input/a5.txt', header = FALSE, col.names = 'id',
+                stringsAsFactors = FALSE) %>%
   data.table()
 
 min_max_func <- function(id, skip_symbols, min_v, max_v, upper_l) {
