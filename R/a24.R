@@ -45,7 +45,6 @@ for (i in 1:ncol(dir_matrix)) { #LOOPING THROUGH Columns of the direction matrix
   final_coord <- final_coord  + cc
 }
 rownames(final_coord) <- NULL
-
 black_tiles <- data.table(final_coord) %>%
   .[, n := .N, by = .(X, Y, Z)] %>%
   .[n %% 2 != 0] # Eliminating tiles which were flipped to black and then back to white 
